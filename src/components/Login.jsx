@@ -21,7 +21,7 @@ function Login() {
             console.log(response.data)
             navigate("/dashboard")
         } catch (error) {
-            alert(error.response?.data?.message || "Username and/or password are incorrect")
+            alert(error.response?.data?.error)
         }
     }
 
