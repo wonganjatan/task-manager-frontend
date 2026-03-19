@@ -1,9 +1,7 @@
-import { useState } from 'react'
-import './App.css'
-import Registration from './components/Registration'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Login from './components/Login'
+import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import Login from './components/Login'
+import Registration from './components/Registration'
 import Dashboard from './components/Dashboard'
 import TasksPage from './components/TasksPage'
 
