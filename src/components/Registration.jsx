@@ -1,8 +1,10 @@
 import axios from "axios"
 import { useState } from "react"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from "react-toastify"
 
 function Registration() {
+    const navigate = useNavigate()
     const [errors, setErrors] = useState({})
     const [formData, setFormData] = useState({
         firstName: "",
@@ -21,7 +23,7 @@ function Registration() {
                 formData
             )
 
-            console.log(response.data)
+            toast.success("Registered successfully!")
             navigate("/login")
         } catch (error) {
             if (error.response.status === 400) {
