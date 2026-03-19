@@ -43,7 +43,7 @@ function Login() {
                 </form>
                 <p>
                     Do not have an account?{" "}
-                    <Link to="/register" className="text-blue-500 underline">
+                    <Link to="/registration" className="text-blue-500 underline">
                         Register
                     </Link>
                 </p>
