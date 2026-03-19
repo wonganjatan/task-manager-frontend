@@ -17,7 +17,7 @@ function Registration() {
     return (
         <div className="flex h-screen items-center justify-center">
             <div className="border rounded-2xl p-8 shadow-2xl">
-                <div className="">
+                <div className="min-w-sm">
                     <h2 className="text-2xl font-bold mb-4">Registration</h2>
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                         <div className="flex flex-col">
@@ -41,7 +41,7 @@ function Registration() {
                             <input className="border rounded-lg p-0.5" name="password" value={formData.password} onChange={e => setFormData({...formData, [e.target.name]: e.target.value})} minLength="8" required/>
                         </div>
 
-                        <button type="submit" className="border rounded-lg p-0.5" name="">Register</button>
+                        <button type="submit" className="border rounded-lg p-0.5 bg-blue-500 text-white">Register</button>
                     </form>
                 </div>
                 <div className="">
