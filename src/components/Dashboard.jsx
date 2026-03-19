@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
+import { Link } from "react-router-dom"
 
 function Dashboard() {
     const [tasksCount, setTasksCount] = useState(0)
@@ -12,7 +13,6 @@ function Dashboard() {
                 "http://localhost:8080/api/admin/dashboard")
 
             setTasksCount(res.data.tasksCount)
-            console.log(res.data.tasksCount)
             } catch (error) {
                 toast.error("Error: getTasksCount")
             }
@@ -27,8 +27,8 @@ function Dashboard() {
                 <div>
                     <h1 className="text-4xl">Tasks: {tasksCount}</h1>
                 </div>
-                <div>
-                    {/* <Link to="/tasks">Tasks</Link> */}
+                <div className="flex items-center justify-center pt-4">
+                    <Link to="/tasks" className='border rounded-lg px-2 pb-1 bg-blue-500 text-white'>Tasks</Link>
                 </div>
             </div>
         </div>

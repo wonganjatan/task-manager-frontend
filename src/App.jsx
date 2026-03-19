@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
 import { ToastContainer } from 'react-toastify'
 import Dashboard from './components/Dashboard'
+import TasksPage from './components/TasksPage'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/tasks' element={<TasksPage/>}/>
       </Routes>
     </>
   )
