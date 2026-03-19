@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 function Login() {
     const navigate = useNavigate()
+    const [errors, setErrors] = useState("")
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -18,10 +20,10 @@ function Login() {
                 formData
             )
 
-            console.log(response.data)
+            toast.success(`Welcome Back ${formData.username}`)
             navigate("/dashboard")
         } catch (error) {
-            alert(error.response?.data?.error)
+            setErrors(error.response?.data?.error)
         }
     }
 
@@ -41,6 +43,7 @@ function Login() {
 
                     <button type="submit" className='border rounded-lg px-2 pb-1 bg-blue-500 text-white'>Login</button>
                 </form>
+                {errors && <p className="text-red-500">{errors}</p>}
                 <p>
                     Do not have an account?{" "}
                     <Link to="/registration" className="text-blue-500 underline">
