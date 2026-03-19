@@ -4,6 +4,7 @@ import Registration from './components/Registration'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
 import { ToastContainer } from 'react-toastify'
+import Dashboard from './components/Dashboard'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={<Login/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/registration' element={<Registration/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
       </Routes>
     </>
   )
