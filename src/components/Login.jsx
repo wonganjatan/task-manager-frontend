@@ -1,14 +1,28 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function Login() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: "",
         password: ""
     })
 
-    function handleSubmit() {
+    async function handleSubmit(e) {
+        e.preventDefault()
 
+        try {
+            const response = await axios.post(
+                "http://localhost:8080/api/auth/login",
+                formData
+            )
+
+            console.log(response.data)
+            navigate("/dashboard")
+        } catch (error) {
+            alert(error.response?.data?.message || "Username and/or password are incorrect")
+        }
     }
 
     return (
