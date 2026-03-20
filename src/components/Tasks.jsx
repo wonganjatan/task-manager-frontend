@@ -1,8 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import TaskCard from "./TaskCard"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
+import TaskCard from "./TaskCard"
 
 function Tasks({ filterData }) {
     const [data, setData] = useState({ tasks: [], tasksCount: 0 })
