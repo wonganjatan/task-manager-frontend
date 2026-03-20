@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Registration from './pages/Registration'
 import Dashboard from './pages/Dashboard'
 import TasksPage from './pages/TasksPage'
+import TaskCreatePage from './pages/TaskCreatePage'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/tasks' element={<TasksPage/>}/>
+        <Route path='/tasks/new' element={<TaskCreatePage/>}/>
       </Routes>
     </>
   )
