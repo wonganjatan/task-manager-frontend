@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import TaskCard from "./TaskCard"
+import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 
 function Tasks({ filterData }) {
     const [data, setData] = useState({ tasks: [], tasksCount: 0 })
@@ -15,7 +17,7 @@ function Tasks({ filterData }) {
 
                 setData(res.data)
             } catch (error) {
-                
+                toast.error(error)
             }
         }
 
@@ -26,7 +28,7 @@ function Tasks({ filterData }) {
         <div className="p-8">
             <div className="flex items-center justify-between pb-8">
                 <h1 className="text-4xl">Tasks ({data.tasksCount})</h1>
-                <p>Link to create Task</p>
+                <Link to="/tasks/new">Create Task</Link>
             </div>
             <div className="flex flex-wrap gap-4">
                 {data.tasks.map(task => (
