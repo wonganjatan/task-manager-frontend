@@ -6,7 +6,7 @@ import Footer from "../components/Footer"
 
 function TasksPage() {
 
-    const [filterData, setFilterData] = useState({
+    const [filterTasks, setFilterTasks] = useState({
         priority: "",
         status: "",
         dueDate: ""
@@ -16,8 +16,8 @@ function TasksPage() {
         <div className="h-screen flex flex-col justify-between">
             <Header/>
             <div className="flex-1 grid grid-cols-[300px_1fr]">
-                <Sidebar onFilter={setFilterData}/>
-                <Tasks filterData={filterData}/>
+                <Sidebar onFilter={setFilterTasks}/>
+                <Tasks filterTasks={filterTasks}/>
             </div>
             <Footer/>
         </div>

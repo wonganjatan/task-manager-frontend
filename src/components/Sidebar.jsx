@@ -1,22 +1,22 @@
 import { useState } from "react"
 
 function Sidebar({ onFilter}) {
-    const [searchData, setSearchData] = useState({
+    const [searchTasks, setSearchTasks] = useState({
         priority: "",
         status: "",
         dueDate: ""
     })
 
     function handleChange(e) {
-        setSearchData({
-            ...searchData,
+        setSearchTasks({
+            ...searchTasks,
             [e.target.name]: e.target.value
         })
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        onFilter(searchData)
+        onFilter(searchTasks)
     }
 
     return (
@@ -24,7 +24,7 @@ function Sidebar({ onFilter}) {
             <form onSubmit={handleSubmit} className="border rounded-2xl flex-1 h-auto p-4 space-y-2">
                 <div className="flex items-center space-x-2">
                     <label htmlFor="priority">Priority:</label>
-                    <select name="priority" id="priority" className="border rounded p-1 flex-1" value={searchData.priority} onChange={handleChange}>
+                    <select name="priority" id="priority" className="border rounded p-1 flex-1" value={searchTasks.priority} onChange={handleChange}>
                         <option value=""></option>
                         <option value="LOW">LOW</option>
                         <option value="MEDIUM">MEDIUM</option>
@@ -33,7 +33,7 @@ function Sidebar({ onFilter}) {
                 </div>
                 <div className="flex items-center space-x-2">
                     <label htmlFor="status">Status:</label>
-                    <select name="status" id="status" className="border rounded p-1 flex-1" value={searchData.status} onChange={handleChange}>
+                    <select name="status" id="status" className="border rounded p-1 flex-1" value={searchTasks.status} onChange={handleChange}>
                         <option value=""></option>
                         <option value="TODO">TODO</option>
                         <option value="IN_PROGRESS">IN_PROGRESS</option>
@@ -42,7 +42,7 @@ function Sidebar({ onFilter}) {
                 </div>
                 <div className="flex items-center space-x-2">
                     <label htmlFor="dueDate">Due Date:</label>
-                    <select name="dueDate" id="dueDate" className="border rounded p-1 flex-1" value={searchData.dueDate} onChange={handleChange}>
+                    <select name="dueDate" id="dueDate" className="border rounded p-1 flex-1" value={searchTasks.dueDate} onChange={handleChange}>
                         <option value=""></option>
                         <option value="ASCENDING">ASCENDING</option>
                         <option value="DESCENDING">DESCENDING</option>
