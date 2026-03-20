@@ -2,14 +2,15 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import TaskCard from "./TaskCard"
 
-function Tasks() {
+function Tasks({ filterData }) {
     const [data, setData] = useState({ tasks: [], tasksCount: 0 })
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost:8080/api/admin/tasks"
+                    "http://localhost:8080/api/admin/tasks",
+                    { params: filterData }
                 )
 
                 setData(res.data)
@@ -19,7 +20,7 @@ function Tasks() {
         }
 
         fetchData()
-    }, [])
+    }, [filterData])
 
     return (
         <div className="p-8">
