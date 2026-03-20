@@ -6,10 +6,17 @@ import { toast } from 'react-toastify'
 function Login() {
     const navigate = useNavigate()
     const [errors, setErrors] = useState("")
-    const [formData, setFormData] = useState({
+    const [userForm, setUserForm] = useState({
         username: "",
         password: ""
     })
+
+    function handleChange(e) {
+        setUserForm({
+            ...userForm,
+            [e.target.name]: e.target.value
+        })
+    }
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -17,10 +24,10 @@ function Login() {
         try {
             const response = await axios.post(
                 "http://localhost:8080/api/auth/login",
-                formData
+                userForm
             )
 
-            toast.success(`Welcome Back ${formData.username}`)
+            toast.success(`Welcome Back ${userForm.username}`)
             navigate("/dashboard")
         } catch (error) {
             setErrors(error.response?.data?.error)
@@ -34,11 +41,11 @@ function Login() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-col">
                         <label htmlFor="username">Username:</label>
-                        <input type="text" name="username" className='border rounded-lg p-0.5' value={formData.username} onChange={e => setFormData({...formData, [e.target.name]: e.target.value})} required/>
+                        <input type="text" name="username" className='border rounded-lg p-0.5' value={userForm.username} onChange={handleChange} required/>
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="password">Password:</label>
-                        <input type="password" name="password" className='border rounded-lg p-0.5' value={formData.password} onChange={e => setFormData({...formData, [e.target.name]: e.target.value})} required/>
+                        <input type="password" name="password" className='border rounded-lg p-0.5' value={userForm.password} onChange={handleChange} required/>
                     </div>
 
                     <button type="submit" className='border rounded-lg px-2 pb-1 bg-blue-500 text-white'>Login</button>

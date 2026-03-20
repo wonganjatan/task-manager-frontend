@@ -6,7 +6,7 @@ import { toast } from "react-toastify"
 function Registration() {
     const navigate = useNavigate()
     const [errors, setErrors] = useState({})
-    const [formData, setFormData] = useState({
+    const [userForm, setUserForm] = useState({
         firstName: "",
         lastName: "",
         email: "",
@@ -14,13 +14,20 @@ function Registration() {
         password: ""
     })
 
+    function handleChange(e) {
+        setUserForm({
+            ...userForm,
+            [e.target.name]: e.target.value
+        })
+    }
+
     async function handleSubmit(e) {
         e.preventDefault()
 
         try {
             const response = await axios.post(
                 "http://localhost:8080/api/auth/registration",
-                formData
+                userForm
             )
 
             toast.success("Registered successfully!")
@@ -49,25 +56,25 @@ function Registration() {
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                         <div className="flex flex-col">
                             <label htmlFor="firstName">First Name:</label>
-                            <input type="text" className="border rounded-lg p-0.5" name="firstName" value={formData.firstName} onChange={e => setFormData({...formData, [e.target.name]: e.target.value})} placeholder="John" required/>
+                            <input type="text" className="border rounded-lg p-0.5" name="firstName" value={userForm.firstName} onChange={handleChange} placeholder="John" required/>
                         </div>
                         <div className="flex flex-col">
                             <label htmlFor="lastName">Last Name:</label>
-                            <input type="text" className="border rounded-lg p-0.5" name="lastName" value={formData.lastName} onChange={e => setFormData({...formData, [e.target.name]: e.target.value})} placeholder="Doe" required/>
+                            <input type="text" className="border rounded-lg p-0.5" name="lastName" value={userForm.lastName} onChange={handleChange} placeholder="Doe" required/>
                         </div>
                         <div className="flex flex-col">
                             <label htmlFor="email">Email:</label>
-                            <input type="text" className="border rounded-lg p-0.5" name="email" value={formData.email} onChange={e => setFormData({...formData, [e.target.name]: e.target.value})} placeholder="example@email.com" required/>
+                            <input type="text" className="border rounded-lg p-0.5" name="email" value={userForm.email} onChange={handleChange} placeholder="example@email.com" required/>
                             {errors.email && <p className="text-red-500">{errors.email}</p>}
                         </div>
                         <div className="flex flex-col">
                             <label htmlFor="username">Username:</label>
-                            <input type="text" className="border rounded-lg p-0.5" name="username" value={formData.username} onChange={e => setFormData({...formData, [e.target.name]: e.target.value})} required/>
+                            <input type="text" className="border rounded-lg p-0.5" name="username" value={userForm.username} onChange={handleChange} required/>
                             {errors.username && <p className="text-red-500">{errors.username}</p>}
                         </div>
                         <div className="flex flex-col">
                             <label htmlFor="password">Password:</label>
-                            <input type="password" className="border rounded-lg p-0.5" name="password" value={formData.password} onChange={e => setFormData({...formData, [e.target.name]: e.target.value})} minLength="8" required/>
+                            <input type="password" className="border rounded-lg p-0.5" name="password" value={userForm.password} onChange={handleChange} minLength="8" required/>
                             {errors.password && <p className="text-red-500">{errors.password}</p>}
                         </div>
 
