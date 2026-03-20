@@ -10,12 +10,12 @@ function Tasks({ filterData }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(
+                const response = await axios.get(
                     "http://localhost:8080/api/admin/tasks",
                     { params: filterData }
                 )
 
-                setData(res.data)
+                setData(response.data)
             } catch (error) {
                 toast.error(error)
             }
