@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function TaskCard({ task }) {
 
     return (
@@ -14,7 +16,7 @@ function TaskCard({ task }) {
                 <p><strong>Due: </strong>{task.dueDate}</p>
             </div>
             <div className="flex items-center justify-center">
-                <p>View</p>
+                <Link to={`/tasks/${task.id}`}>View Details</Link>
             </div>
         </div>
     )
