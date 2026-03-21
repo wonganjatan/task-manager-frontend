@@ -1,17 +1,17 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-function TaskForm({ users }) {
+function TaskForm({ users, initialTask, buttonLabel }) {
 
     const navigate = useNavigate()
     const [taskForm, setTaskForm] = useState({
-        title: "",
-        description: "",
-        priority: "LOW",
-        status: "TODO",
-        assignedUser: null,
+        title: initialTask?.title || "",
+        description: initialTask?.description || "",
+        priority: initialTask?.priority || "LOW",
+        status: initialTask?.status || "TODO",
+        assignedUserId: initialTask?.assignedUserId || "",
         dueDate: ""
     })
     const [errors, setErrors] = useState({
@@ -21,9 +21,10 @@ function TaskForm({ users }) {
     })
 
     function handleChange(e) {
+        const { name, value } = e.target
         setTaskForm({
             ...taskForm,
-            [e.target.name]: e.target.value
+            [name]: value
         })
     }
 
@@ -31,12 +32,24 @@ function TaskForm({ users }) {
         e.preventDefault()
 
         try {
-            const response = await axios.post(
-                "http://localhost:8080/api/admin/tasks/new", 
-                taskForm
-            )
+            console.log(taskForm.assignedUserId)
+            console.log(typeof taskForm.assignedUserId)
+            console.log(taskForm)
 
-            toast.success("Task created successfully")
+            if (initialTask) {
+                const response = await axios.put(
+                    `http://localhost:8080/api/admin/tasks/${initialTask.id}`, 
+                    taskForm)
+
+                toast.success("Task edited Successfully")
+            } else {
+                const response = await axios.post(
+                    "http://localhost:8080/api/admin/tasks/new", 
+                    taskForm)
+                    
+                toast.success("Task created successfully")
+            }
+
             navigate("/tasks")
         } catch (error) {
             if (error.response.data.errors != null) {
@@ -57,52 +70,55 @@ function TaskForm({ users }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col">
-                <label htmlFor="title">Title:</label>
-                <input type="text" name="title" id="title" value={taskForm.title} onChange={handleChange} className="border rounded-lg p-0.5" minLength="1" required/>
-                {errors.title && <p className="text-red-500">{errors.title}</p>}
-            </div>
-            <div className="flex flex-col">
-                <label htmlFor="description">Description:</label>
-                <input type="text" name="description" id="description"  value={taskForm.description} onChange={handleChange} className="border rounded-lg p-0.5"  minLength="1" required/>
-                {errors.description && <p className="text-red-500">{errors.description}</p>}
-            </div>
-            <div className="flex items-center space-x-2">
-                <label htmlFor="priority">Priority:</label>
-                <select name="priority" id="priority" value={taskForm.priority} onChange={handleChange} className="border rounded p-1 flex-1">
-                    <option value="LOW">LOW</option>
-                    <option value="MEDIUM">MEDIUM</option>
-                    <option value="HIGH">HIGH</option>
-                </select>
-            </div>
-            <div className="flex items-center space-x-2">
-                <label htmlFor="status">Status:</label>
-                <select name="status" id="status" value={taskForm.status} onChange={handleChange} className="border rounded p-1 flex-1">
-                    <option value="TODO">TODO</option>
-                    <option value="IN_PROGRESS">IN_PROGRESS</option>
-                    <option value="DONE">DONE</option>
-                </select>
-            </div>
-            <div className="flex items-center space-x-2">
-                <label htmlFor="assignedUser">Assign to:</label>
-                <select name="assignedUser" id="assignedUser" value={taskForm.assignedUser} onChange={handleChange} className="border rounded p-1 flex-1">
-                    <option value={null}>Unassigned</option>
-                    {users.map(user => {
-                        return (
-                            <option key={user.id} value={user.firstName + ' ' + user.lastName}>{user.firstName + ' ' + user.lastName}</option>
-                        )
-                    })}
-                </select>
-            </div>
-            <div className="flex flex-col">
-                <label htmlFor="dueDate">Due Date:</label>
-                <input type="datetime-local" name="dueDate" id="dueDate"  value={taskForm.dueDate} onChange={handleChange} className="border rounded-lg p-0.5"/>
-                {errors.dueDate && <p className="text-red-500">{errors.dueDate}</p>}
-            </div>
+        <div className="border rounded-2xl p-8 shadow-2xl">
+            <h1 className="pb-8">{buttonLabel} Task</h1>
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="flex flex-col">
+                    <label htmlFor="title">Title:</label>
+                    <input type="text" name="title" id="title" value={taskForm.title} onChange={handleChange} className="border rounded-lg p-0.5" minLength="1" required/>
+                    {errors.title && <p className="text-red-500">{errors.title}</p>}
+                </div>
+                <div className="flex flex-col">
+                    <label htmlFor="description">Description:</label>
+                    <input type="text" name="description" id="description"  value={taskForm.description} onChange={handleChange} className="border rounded-lg p-0.5"  minLength="1" required/>
+                    {errors.description && <p className="text-red-500">{errors.description}</p>}
+                </div>
+                <div className="flex items-center space-x-2">
+                    <label htmlFor="priority">Priority:</label>
+                    <select name="priority" id="priority" value={taskForm.priority} onChange={handleChange} className="border rounded p-1 flex-1">
+                        <option value="LOW">LOW</option>
+                        <option value="MEDIUM">MEDIUM</option>
+                        <option value="HIGH">HIGH</option>
+                    </select>
+                </div>
+                <div className="flex items-center space-x-2">
+                    <label htmlFor="status">Status:</label>
+                    <select name="status" id="status" value={taskForm.status} onChange={handleChange} className="border rounded p-1 flex-1">
+                        <option value="TODO">TODO</option>
+                        <option value="IN_PROGRESS">IN_PROGRESS</option>
+                        <option value="DONE">DONE</option>
+                    </select>
+                </div>
+                <div className="flex items-center space-x-2">
+                    <label htmlFor="assignedUserId">Assign to:</label>
+                    <select name="assignedUserId" id="assignedUserId" value={taskForm.assignedUserId} onChange={handleChange} className="border rounded p-1 flex-1">
+                        <option value="">Unassigned</option>
+                        {users.map(user => {
+                            return (
+                                <option key={user.id} value={user.id}>{user.firstName + ' ' + user.lastName}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                <div className="flex flex-col">
+                    <label htmlFor="dueDate">Due Date:</label>
+                    <input type="datetime-local" name="dueDate" id="dueDate"  value={taskForm.dueDate} onChange={handleChange} className="border rounded-lg p-0.5"/>
+                    {errors.dueDate && <p className="text-red-500">{errors.dueDate}</p>}
+                </div>
 
-            <button type="submit">Create Task</button>
-        </form>
+                <button type="submit">{buttonLabel}</button>
+            </form>
+        </div>
     )
     
 }
