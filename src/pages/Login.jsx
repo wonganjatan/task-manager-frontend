@@ -12,9 +12,10 @@ function Login() {
     })
 
     function handleChange(e) {
+        const { name, value } = e.target
         setUserForm({
             ...userForm,
-            [e.target.name]: e.target.value
+            [name]: value
         })
     }
 
@@ -29,7 +30,7 @@ function Login() {
 
             localStorage.setItem("token", response.data.token)
 
-            toast.success(`Welcome Back ${userForm.username}`)
+            toast.success(`Welcome Back ${userForm.username.toLocaleLowerCase()}`)
             navigate("/dashboard")
         } catch (error) {
             setErrors(error.response?.data?.error)
