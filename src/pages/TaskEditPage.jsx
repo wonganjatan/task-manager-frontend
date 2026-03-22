@@ -1,28 +1,48 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import TaskForm from "../components/TaskForm"
 
 function TaskEditPage() {
     const { id } = useParams()
+    const navigate = useNavigate()
     const [task, setTask] = useState(null)
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
     const buttonLabel = 'Edit'
 
     useEffect(() => {
+        const token = localStorage.getItem("token")
         const fetchData = async () => {
             try {
                 const [taskResponse, usersResponse] = await Promise.all([
-                    axios.get(`http://localhost:8080/api/admin/tasks/${id}`),
-                    axios.get('http://localhost:8080/api/admin/users')
+                    axios.get(`http://localhost:8080/api/admin/tasks/${id}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`
+                            }
+                        }
+                    ),
+                    axios.get('http://localhost:8080/api/admin/users',
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`
+                            }
+                        }
+                    )
                 ])
 
                 setTask(taskResponse.data)
                 setUsers(usersResponse.data)
             } catch (error) {
-                toast.error(error)
+                if (error.response?.status === 401) {
+                    toast.error(error.response?.data?.message)
+
+                    return navigate("/")
+                } else {
+                    toast.error(error)
+                }
             } finally {
                 setLoading(false)
             }

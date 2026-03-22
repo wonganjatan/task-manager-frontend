@@ -1,25 +1,37 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import TaskCard from "./TaskCard"
 
 function Tasks({ filterTasks }) {
+    const navigate = useNavigate()
     const [tasks, setTasks] = useState([])
     const [totalTasks, setTotalTasks] = useState(0)
 
     useEffect(() => {
+        const token = localStorage.getItem("token")
+        
         const fetchTasks = async () => {
             try {
                 const response = await axios.get(
                     "http://localhost:8080/api/admin/tasks",
-                    { params: filterTasks }
+                    { params: filterTasks,
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
                 )
 
                 setTasks(response.data.tasks)
                 setTotalTasks(response.data.totalTasks)
             } catch (error) {
-                toast.error(error)
+                if (error.response?.status === 401) {
+                    toast.error(error.response?.data?.message)
+                    return navigate("/")
+                } else {
+                    toast.error(error)
+                }
             }
         }
 

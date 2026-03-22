@@ -12,12 +12,25 @@ function TaskDetailsPage() {
     
     useEffect(() => {
 
+        const token = localStorage.getItem("token")
+
         const fetchTaskById = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/admin/tasks/${id}`)
+                const response = await axios.get(`http://localhost:8080/api/admin/tasks/${id}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`
+                            }
+                        })
+                            
                 setTask(response.data)
             } catch (error) {
-                toast.error(error)
+                if (error.response?.status === 401) {
+                    toast.error(error.response?.data?.message)
+                    navigate("/")
+                } else {
+                    toast.error(error)
+                }
             } finally {
                 setLoading(false)
             }
@@ -35,16 +48,27 @@ function TaskDetailsPage() {
     }
 
     async function handleDelete() {
+        const token = localStorage.getItem("token")
         if (!window.confirm(`Are you sure you want to delete ${task.title}`)) {
             return
         }
 
         try {
-            await axios.delete(`http://localhost:8080/api/admin/tasks/${id}`)
+            await axios.delete(`http://localhost:8080/api/admin/tasks/${id}`,
+                { headers: {
+                    Authorization: `Bearer ${token}`
+                }}
+            )
             toast.success("Task deleted successfully")
             navigate("/tasks")
         } catch (error) {
-            toast.error(error)
+            if (error.response?.status === 401) {
+                toast.error(error.response?.data?.message)
+                    
+                return navigate("/")
+            } else {
+                toast.error(error.response?.data?.message)
+            }
         }
     }
 

@@ -31,28 +31,36 @@ function TaskForm({ users, initialTask, buttonLabel }) {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        try {
-            console.log(taskForm.assignedUserId)
-            console.log(typeof taskForm.assignedUserId)
-            console.log(taskForm)
+        const token = localStorage.getItem("token")
 
+        try {
             if (initialTask) {
                 const response = await axios.put(
                     `http://localhost:8080/api/admin/tasks/${initialTask.id}`, 
-                    taskForm)
+                    taskForm,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`
+                            }
+                        })
 
                 toast.success("Task edited Successfully")
             } else {
                 const response = await axios.post(
                     "http://localhost:8080/api/admin/tasks/new", 
-                    taskForm)
+                    taskForm,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`
+                            }
+                        })
                     
                 toast.success("Task created successfully")
             }
 
             navigate("/tasks")
         } catch (error) {
-            if (error.response.data.errors != null) {
+            if (error.response?.data?.errors != null) {
                 const errArray = error.response.data.errors
                 const errMap = {}
 
@@ -61,8 +69,12 @@ function TaskForm({ users, initialTask, buttonLabel }) {
                 });
 
                 setErrors(errMap)
-            } else if (error.response.data.error != null) {
+            } else if (error.response?.data?.error != null) {
                 setErrors({...errors, dueDate: error.response.data.error})
+            } else if (error.response?.status === 401) {
+                toast.error(error.response?.data?.message)
+
+                return navigate("/")
             } else {
                 toast.error(error)
             }

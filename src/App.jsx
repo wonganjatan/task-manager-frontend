@@ -11,7 +11,7 @@ import TaskEditPage from './pages/TaskEditPage'
 function App() {
   return (
     <>
-      <ToastContainer position='top-right' autoClose={5000}/> 
+      <ToastContainer position='top-right' autoClose={1000}/> 
       <Routes>
         <Route path='/' element={<Login/>}/>
         <Route path='/login' element={<Login/>}/>
