@@ -27,6 +27,8 @@ function Login() {
                 userForm
             )
 
+            localStorage.setItem("token", response.data.token)
+
             toast.success(`Welcome Back ${userForm.username}`)
             navigate("/dashboard")
         } catch (error) {
