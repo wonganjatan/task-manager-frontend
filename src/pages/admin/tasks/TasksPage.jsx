@@ -1,8 +1,8 @@
 import { useState } from "react"
-import Header from "../components/Header"
-import Sidebar from "../components/Sidebar"
-import Tasks from "../components/Tasks"
-import Footer from "../components/Footer"
+import Header from "../../../components/layouts/Header"
+import Sidebar from "../../../components/layouts/Sidebar"
+import Tasks from "../../../components/tasks/Tasks"
+import Footer from "../../../components/layouts/Footer"
 
 function TasksPage() {
 

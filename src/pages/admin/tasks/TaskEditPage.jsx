@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
-import TaskForm from "../components/TaskForm"
+import TaskForm from "../../../components/tasks/TaskForm"
 
 function TaskEditPage() {
     const { id } = useParams()

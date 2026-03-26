@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import Login from './pages/Login'
-import Registration from './pages/Registration'
-import Dashboard from './pages/Dashboard'
-import TasksPage from './pages/TasksPage'
-import TaskCreatePage from './pages/TaskCreatePage'
-import TaskDetailsPage from './pages/TaskDetailsPage'
-import TaskEditPage from './pages/TaskEditPage'
+import Login from './pages/LoginPage'
+import Registration from './pages/RegistrationPage'
+import Dashboard from './pages/admin/AdminDashboardPage'
+import TasksPage from './pages/admin/tasks/TasksPage'
+import TaskCreatePage from './pages/admin/tasks/TaskCreatePage'
+import TaskDetailsPage from './pages/admin/tasks/TaskDetailsPage'
+import TaskEditPage from './pages/admin/tasks/TaskEditPage'
 
 function App() {
   return (
