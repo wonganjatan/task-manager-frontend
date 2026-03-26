@@ -33,7 +33,8 @@ function Login() {
             toast.success(`Welcome Back ${userForm.username.toLocaleLowerCase()}`)
             navigate("/dashboard")
         } catch (error) {
-            setErrors(error.response?.data?.error)
+            setErrors(error.response?.data?.message)
+            console.log(error.response?.data)
         }
     }
 
