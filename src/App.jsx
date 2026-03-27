@@ -8,6 +8,7 @@ import AdminTaskCreatePage from './pages/admin/tasks/AdminTaskCreatePage'
 import AdminTaskDetailsPage from './pages/admin/tasks/AdminTaskDetailsPage'
 import AdminTaskEditPage from './pages/admin/tasks/AdminTaskEditPage'
 import UserDashboardPage from './pages/user/UserDashboardPage'
+import UserTasksPage from './pages/user/tasks/UserTasksPage'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/admin/tasks/:id/edit" element={<AdminTaskEditPage/>} />
 
         <Route path='/user/dashboard' element={<UserDashboardPage/>}/>
+        <Route path='/user/tasks' element={<UserTasksPage/>}/>
       </Routes>
     </>
   )
