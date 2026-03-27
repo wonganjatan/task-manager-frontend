@@ -21,7 +21,7 @@ function Header() {
             <div className="flex gap-8">
                 <Link to={dashboard} className="text-white">Dashboard</Link>
                 <Link to={tasks} className="text-white">Tasks</Link>
-                <button type="submit" onClick={handleSubmit}>Log out</button>
+                <button type="submit" onClick={handleSubmit} className="text-white">Log out</button>
             </div>
         </div>
     )

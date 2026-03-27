@@ -42,7 +42,7 @@ function UserDashboard() {
                     <h1 className="text-4xl">Tasks: {totalTasks}</h1>
                 </div>
                 <div className="flex items-center justify-center pt-4">
-                    <Link to="/tasks" className='border rounded-lg px-2 pb-1 bg-blue-500 text-white'>Tasks</Link>
+                    <Link to="/user/tasks" className='border rounded-lg px-2 pb-1 bg-blue-500 text-white'>Tasks</Link>
                 </div>
             </div>
         </div>
