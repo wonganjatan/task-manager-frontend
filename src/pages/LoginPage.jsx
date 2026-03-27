@@ -2,13 +2,14 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { jwtDecode } from 'jwt-decode'
 
 function Login() {
     const navigate = useNavigate()
     const [errors, setErrors] = useState("")
     const [userForm, setUserForm] = useState({
-        username: "admin",
-        password: "Admin12!"
+        username: "johndoe",
+        password: "Qwerty12!"
     })
 
     function handleChange(e) {
@@ -28,10 +29,18 @@ function Login() {
                 userForm
             )
 
-            localStorage.setItem("token", response.data.token)
+            const token = response.data.token
 
+            localStorage.setItem("token", token)
+
+            const decoded = jwtDecode(token)
+
+            if (decoded.role === "ADMIN") {
+                navigate("/admin/dashboard")
+            }
+
+            navigate("/user/dashboard")
             toast.success(`Welcome Back ${userForm.username.toLocaleLowerCase()}`)
-            navigate("/dashboard")
         } catch (error) {
             setErrors(error.response?.data?.message)
             console.log(error.response?.data)
