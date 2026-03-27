@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState } from "react"
+import { use, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
@@ -17,8 +17,8 @@ function TaskForm({ users, initialTask, buttonLabel }) {
     const [errors, setErrors] = useState({
         title: "",
         description: "",
-        dueDate: ""
     })
+    const [errorDueDate, setErrorDueDate] = useState("")
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -60,23 +60,17 @@ function TaskForm({ users, initialTask, buttonLabel }) {
 
             navigate("/admin/tasks")
         } catch (error) {
-            if (error.response?.data?.errors != null) {
-                const errArray = error.response.data.errors
-                const errMap = {}
+            const data = error.response?.data
 
-                errArray.forEach(err => {
-                    errMap[err.field] = err.defaultMessage
-                });
-
-                setErrors(errMap)
-            } else if (error.response?.data?.error != null) {
-                setErrors({...errors, dueDate: error.response.data.error})
-            } else if (error.response?.status === 401) {
-                toast.error(error.response?.data?.message)
-
-                return navigate("/")
-            } else {
-                toast.error(error)
+            if (typeof data?.message === "string") {
+                setErrorDueDate(data.message)
+                setErrors({ title: "", description: "" })
+            } else if (typeof data?.message === "object") {
+                setErrors({
+                    title: data.message.title || "",
+                    description: data.message.description || ""
+                })
+                setErrorDueDate("")
             }
         }
     }
@@ -125,7 +119,7 @@ function TaskForm({ users, initialTask, buttonLabel }) {
                 <div className="flex flex-col">
                     <label htmlFor="dueDate">Due Date:</label>
                     <input type="datetime-local" name="dueDate" id="dueDate"  value={taskForm.dueDate} onChange={handleChange} className="border rounded-lg p-0.5"/>
-                    {errors.dueDate && <p className="text-red-500">{errors.dueDate}</p>}
+                    {errorDueDate && <p className="text-red-500">{errorDueDate}</p>}
                 </div>
 
                 <button type="submit">{buttonLabel}</button>
