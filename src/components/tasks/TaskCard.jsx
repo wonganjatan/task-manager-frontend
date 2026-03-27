@@ -1,6 +1,9 @@
+import { jwtDecode } from "jwt-decode"
 import { Link } from "react-router-dom"
 
 function TaskCard({ task }) {
+    const token = localStorage.getItem("token")
+    const decoded = jwtDecode(token)
 
     return (
         <div className="flex flex-col justify-between border rounded-2xl w-60 h-60 p-4 shadow-2xl bg-linear-to-br from-indigo-200 via-purple-200 to-pink-200">
@@ -16,7 +19,8 @@ function TaskCard({ task }) {
                 <p><strong>Due: </strong>{task.dueDate}</p>
             </div>
             <div className="flex items-center justify-center">
-                <Link to={`/admin/tasks/${task.id}`}>View Details</Link>
+                {decoded === "ADMIN" ? <Link to={`/admin/tasks/${task.id}`}>View Details</Link>
+                : <Link to={`/user/tasks/${task.id}`}>View Details</Link>}
             </div>
         </div>
     )

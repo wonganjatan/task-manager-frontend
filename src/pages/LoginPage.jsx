@@ -8,8 +8,8 @@ function Login() {
     const navigate = useNavigate()
     const [errors, setErrors] = useState("")
     const [userForm, setUserForm] = useState({
-        username: "admin",
-        password: "Admin12!"
+        username: "johndoe",
+        password: "Qwerty12!"
     })
 
     function handleChange(e) {
