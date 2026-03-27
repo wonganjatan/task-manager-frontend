@@ -26,25 +26,14 @@ function Registration() {
 
         try {
             const response = await axios.post(
-                "http://localhost:8080/api/auth/registration",
+                "http://localhost:8080/api/auth/register",
                 userForm
             )
 
-            toast.success("Registered successfully!")
+            toast.success(response.data?.message)
             navigate("/login")
         } catch (error) {
-            if (error.response.status === 400) {
-                const errArray = error.response.data.errors
-                const errMap = {}
-
-                errArray.forEach(err => {
-                    errMap[err.field] = err.defaultMessage
-                });
-
-                setErrors(errMap)
-            } else {
-                alert(error.response?.data?.error || "Something wrong")
-            }
+            setErrors(error.response?.data?.message)
         }
     }
 
