@@ -42,7 +42,7 @@ function Tasks({ filterTasks }) {
         <div className="p-8">
             <div className="flex items-center justify-between pb-8">
                 <h1 className="text-4xl">Tasks ({totalTasks})</h1>
-                <Link to="/tasks/new">Create Task</Link>
+                <Link to="/admin/tasks/new">Create Task</Link>
             </div>
             <div className="flex flex-wrap gap-4">
                 {tasks.map(task => (

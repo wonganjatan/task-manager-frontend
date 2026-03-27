@@ -58,7 +58,7 @@ function TaskForm({ users, initialTask, buttonLabel }) {
                 toast.success("Task created successfully")
             }
 
-            navigate("/tasks")
+            navigate("/admin/tasks")
         } catch (error) {
             if (error.response?.data?.errors != null) {
                 const errArray = error.response.data.errors

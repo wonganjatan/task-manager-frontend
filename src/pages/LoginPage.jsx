@@ -8,8 +8,8 @@ function Login() {
     const navigate = useNavigate()
     const [errors, setErrors] = useState("")
     const [userForm, setUserForm] = useState({
-        username: "johndoe",
-        password: "Qwerty12!"
+        username: "admin",
+        password: "Admin12!"
     })
 
     function handleChange(e) {
@@ -34,13 +34,16 @@ function Login() {
             localStorage.setItem("token", token)
 
             const decoded = jwtDecode(token)
+            console.log(decoded.role)
 
+            toast.success(`Welcome Back ${decoded.sub.toLocaleLowerCase()}`)
             if (decoded.role === "ADMIN") {
                 navigate("/admin/dashboard")
+            } else {
+                navigate("/user/dashboard")
             }
 
-            navigate("/user/dashboard")
-            toast.success(`Welcome Back ${userForm.username.toLocaleLowerCase()}`)
+            
         } catch (error) {
             setErrors(error.response?.data?.message)
             console.log(error.response?.data)

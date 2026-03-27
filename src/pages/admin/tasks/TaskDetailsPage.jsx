@@ -60,7 +60,7 @@ function TaskDetailsPage() {
                 }}
             )
             toast.success("Task deleted successfully")
-            navigate("/tasks")
+            navigate("/admin/tasks")
         } catch (error) {
             if (error.response?.status === 401) {
                 toast.error(error.response?.data?.message)
@@ -88,10 +88,10 @@ function TaskDetailsPage() {
                 </div>
                 <div className="flex items-center justify-center">
                     <div>
-                        <Link to={'/tasks'}>Back</Link>
+                        <Link to={'/admin/tasks'}>Back</Link>
                     </div>
                     <div>
-                        <Link to={`/tasks/${id}/edit`}>Edit</Link>
+                        <Link to={`/admin/tasks/${id}/edit`}>Edit</Link>
                         <button type="submit" onClick={handleDelete}>Delete</button>
                     </div>
                 </div>

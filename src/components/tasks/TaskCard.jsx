@@ -16,7 +16,7 @@ function TaskCard({ task }) {
                 <p><strong>Due: </strong>{task.dueDate}</p>
             </div>
             <div className="flex items-center justify-center">
-                <Link to={`/tasks/${task.id}`}>View Details</Link>
+                <Link to={`/admin/tasks/${task.id}`}>View Details</Link>
             </div>
         </div>
     )
