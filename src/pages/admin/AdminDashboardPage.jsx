@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { Link, useNavigate } from "react-router-dom"
 
-function Dashboard() {
+function AdminDashboard() {
     const navigate = useNavigate()
     const [totalTasks, setTotalTasks] = useState(0)
 
@@ -49,4 +49,4 @@ function Dashboard() {
     )
 }
 
-export default Dashboard
+export default AdminDashboard
