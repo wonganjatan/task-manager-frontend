@@ -4,7 +4,7 @@ import Sidebar from "../../../components/layouts/Sidebar"
 import Tasks from "../../../components/tasks/Tasks"
 import Footer from "../../../components/layouts/Footer"
 
-function TasksPage() {
+function AdminTasksPage() {
 
     const [filterTasks, setFilterTasks] = useState({
         priority: "",
@@ -24,4 +24,4 @@ function TasksPage() {
     )
 }
 
-export default TasksPage
+export default AdminTasksPage

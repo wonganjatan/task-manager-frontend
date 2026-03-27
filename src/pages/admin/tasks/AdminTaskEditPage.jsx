@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import TaskForm from "../../../components/tasks/TaskForm"
 
-function TaskEditPage() {
+function AdminTaskEditPage() {
     const { id } = useParams()
     const navigate = useNavigate()
     const [task, setTask] = useState(null)
@@ -66,4 +66,4 @@ function TaskEditPage() {
     )
 }
 
-export default TaskEditPage
+export default AdminTaskEditPage

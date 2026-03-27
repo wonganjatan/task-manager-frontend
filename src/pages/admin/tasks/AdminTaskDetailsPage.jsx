@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import { Link } from "react-router-dom"
 
-function TaskDetailsPage() {
+function AdminTaskDetailsPage() {
     const { id } = useParams()
     const [task, setTask] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -100,4 +100,4 @@ function TaskDetailsPage() {
     )
 }
 
-export default TaskDetailsPage
+export default AdminTaskDetailsPage

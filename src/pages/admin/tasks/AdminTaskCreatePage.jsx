@@ -4,7 +4,7 @@ import axios from "axios"
 import TaskForm from "../../../components/tasks/TaskForm"
 
 
-function TaskCreatePage() {
+function AdminTaskCreatePage() {
 
     const [users, setUsers] = useState([])
     const buttonLabel = 'Create'
@@ -42,4 +42,4 @@ function TaskCreatePage() {
     )
 }
 
-export default TaskCreatePage
+export default AdminTaskCreatePage
