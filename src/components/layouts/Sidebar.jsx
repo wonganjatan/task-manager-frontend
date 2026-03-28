@@ -21,7 +21,7 @@ function Sidebar({ onFilter}) {
 
     return (
         <div className="p-8">
-            <form onSubmit={handleSubmit} className="border rounded-2xl flex-1 h-auto p-4 space-y-2">
+            <form onSubmit={handleSubmit} className="border rounded-2xl flex-1 h-auto p-4 space-y-2 shadow-2xl">
                 <div className="flex items-center space-x-2">
                     <label htmlFor="priority">Priority:</label>
                     <select name="priority" id="priority" className="border rounded p-1 flex-1" value={searchTasks.priority} onChange={handleChange}>
@@ -50,7 +50,7 @@ function Sidebar({ onFilter}) {
                 </div>
 
                 <div className="flex justify-end pt-2">
-                    <button type="submit" className='border rounded-lg px-2 pb-1 bg-blue-500 text-white'>Search</button>
+                    <button type="submit" className='border border-blue-500 rounded-lg px-2 pb-1 bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition-colors'>Search</button>
                 </div>
             </form>
         </div>
