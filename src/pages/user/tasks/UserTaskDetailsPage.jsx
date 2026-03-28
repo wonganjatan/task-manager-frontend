@@ -68,7 +68,7 @@ function UserTaskDetailsPage() {
 
     return (
         <div className="h-screen flex items-center justify-center">
-            <div className="flex flex-col items-center justify-between border rounded-2xl w-120 h-120 p-4 shadow-2xl bg-linear-to-br from-indigo-200 via-purple-200 to-pink-200">
+            <div className="flex flex-col justify-between border rounded-2xl w-120 h-120 p-4 shadow-2xl bg-linear-to-br from-indigo-200 via-purple-200 to-pink-200">
                 <div>
                     <p className="text-xl font-bold">{task.title}</p>
                     <p className="h-18"><strong>Description: </strong>{task.description}</p>
@@ -80,14 +80,17 @@ function UserTaskDetailsPage() {
                     </p>
                     <p><strong>Due: </strong>{task.dueDate}</p>
                 </div>
-                <div className="flex items-center justify-center">
-                    <div>
-                        <Link to={'/user/tasks'}>Back</Link>
+                <div className="flex items-end justify-between">
+                    <div >
+                        <Link to={'/user/tasks'} className="w-full flex justify-center border border-blue-500 rounded-xl hover:bg-gray-200 px-2 py-1">Back</Link>
                     </div>
-                    <div>
-                        <button type="submit" onClick={() => handleSubmit("TODO")}>TODO</button>
-                        <button type="submit" onClick={() => handleSubmit("IN_PROGRESS")}>IN_PROGRESS</button>
-                        <button type="submit" onClick={() => handleSubmit("DONE")}>DONE</button>
+                    <div className="flex flex-col items-center">
+                        <p>Change Task Status:</p>
+                        <div className="flex gap-4">
+                            <button type="submit" className="flex-1 text-white border border-blue-500 rounded-xl px-2 py-1 bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer" onClick={() => handleSubmit("TODO")}>TODO</button>
+                            <button type="submit" className="flex-1 text-white border border-blue-500 rounded-xl px-2 py-1 bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer" onClick={() => handleSubmit("IN_PROGRESS")}>IN_PROGRESS</button>
+                            <button type="submit" className="flex-1 text-white border border-blue-500 rounded-xl px-2 py-1 bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer" onClick={() => handleSubmit("DONE")}>DONE</button>
+                        </div>
                     </div>
                 </div>
             </div>
