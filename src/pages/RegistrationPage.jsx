@@ -67,11 +67,11 @@ function Registration() {
                             {errors.password && <p className="text-red-500">{errors.password}</p>}
                         </div>
 
-                        <button type="submit" className="border rounded-lg p-0.5 bg-blue-500 text-white">Register</button>
+                        <button type="submit" className="border border-blue-500 rounded-lg p-0.5 bg-blue-500 text-white cursor-pointer">Register</button>
                     </form>
                 </div>
-                <div className="">
-                    <Link to="/login" className="text-blue-500 mt-2">Back</Link>
+                <div className="py-4">
+                    <Link to="/login" className="w-full flex justify-center border border-blue-500 rounded-xl hover:bg-gray-200 py-1">Back</Link>
                 </div>
             </div>
         </div>
