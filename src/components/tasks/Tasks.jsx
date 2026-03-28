@@ -59,7 +59,7 @@ function Tasks({ filterTasks }) {
         <div className="p-8">
             <div className="flex items-center justify-between pb-8">
                 <h1 className="text-4xl">Tasks ({totalTasks})</h1>
-                {decoded.role === "ADMIN" && <Link to="/admin/tasks/new">Create Task</Link>}
+                {decoded.role === "ADMIN" && <Link to="/admin/tasks/new" className='text-white py-1 border border-green-500 rounded-lg px-2 pb-1 bg-green-500 hover:bg-green-600 transition-colors duration-300'>Create Task</Link>}
             </div>
             <div className="flex flex-wrap gap-4">
                 {tasks.map(task => (
