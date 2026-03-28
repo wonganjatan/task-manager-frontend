@@ -6,7 +6,7 @@ function TaskCard({ task }) {
     const decoded = jwtDecode(token)
 
     return (
-        <div className="flex flex-col justify-between border rounded-2xl w-60 h-60 p-4 shadow-2xl bg-linear-to-br from-indigo-200 via-purple-200 to-pink-200">
+        <div className="flex flex-col justify-between border rounded-2xl w-60 h-70 p-4 shadow-2xl bg-linear-to-br from-indigo-200 via-purple-200 to-pink-200">
             <div>
                 <p className="text-xl font-bold">{task.title}</p>
                 <p className="h-18"><strong>Description: </strong>{task.description}</p>
@@ -19,8 +19,8 @@ function TaskCard({ task }) {
                 <p><strong>Due: </strong>{task.dueDate}</p>
             </div>
             <div className="flex items-center justify-center">
-                {decoded === "ADMIN" ? <Link to={`/admin/tasks/${task.id}`}>View Details</Link>
-                : <Link to={`/user/tasks/${task.id}`}>View Details</Link>}
+                {decoded === "ADMIN" ? <Link to={`/admin/tasks/${task.id}`} className="text-white border border-blue-500 rounded-xl px-2 py-1 bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer">View Details</Link>
+                : <Link to={`/user/tasks/${task.id}`} className="text-white border border-blue-500 rounded-xl px-2 py-1 bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer">View Details</Link>}
             </div>
         </div>
     )
