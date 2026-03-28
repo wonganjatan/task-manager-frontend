@@ -9,9 +9,10 @@ function UserTaskDetailsPage() {
     const [task, setTask] = useState(null)
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
+
+    const token = localStorage.getItem("token")
     
     useEffect(() => {
-        const token = localStorage.getItem("token")
 
         const fetchTaskById = async () => {
             try {
@@ -46,6 +47,24 @@ function UserTaskDetailsPage() {
         return <p>Task not found</p>
     }
 
+    const handleSubmit = async (newStatus) => {
+        
+        try {
+            const response = await axios.patch(
+                `http://localhost:8080/api/user/tasks/${id}/status`,
+                { status: newStatus },
+                { headers: {
+                    Authorization: `Bearer ${token}`
+                }}
+            )
+
+            setTask(response.data)
+            toast.success("Task successfully updated")
+            navigate("/user/tasks")
+        } catch (error) {
+            console.log(error.response?.data)
+        }
+    }
 
     return (
         <div className="h-screen flex items-center justify-center">
@@ -63,9 +82,12 @@ function UserTaskDetailsPage() {
                 </div>
                 <div className="flex items-center justify-center">
                     <div>
-                        <Link to={'/admin/tasks'}>Back</Link>
+                        <Link to={'/user/tasks'}>Back</Link>
                     </div>
                     <div>
+                        <button type="submit" onClick={() => handleSubmit("TODO")}>TODO</button>
+                        <button type="submit" onClick={() => handleSubmit("IN_PROGRESS")}>IN_PROGRESS</button>
+                        <button type="submit" onClick={() => handleSubmit("DONE")}>DONE</button>
                     </div>
                 </div>
             </div>
